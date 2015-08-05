@@ -15,9 +15,23 @@ System.config({
 
 System.config({
   "map": {
+    "angular": "github:angular/bower-angular@1.4.3",
+    "angular-material": "github:angular/bower-material@0.10.0",
     "babel": "npm:babel-core@5.8.20",
     "babel-runtime": "npm:babel-runtime@5.8.20",
     "core-js": "npm:core-js@0.9.18",
+    "github:angular/bower-angular-animate@1.4.3": {
+      "angular": "github:angular/bower-angular@1.4.3"
+    },
+    "github:angular/bower-angular-aria@1.4.3": {
+      "angular": "github:angular/bower-angular@1.4.3"
+    },
+    "github:angular/bower-material@0.10.0": {
+      "angular": "github:angular/bower-angular@1.4.3",
+      "angular-animate": "github:angular/bower-angular-animate@1.4.3",
+      "angular-aria": "github:angular/bower-angular-aria@1.4.3",
+      "css": "github:systemjs/plugin-css@0.1.13"
+    },
     "github:jspm/nodelibs-process@0.1.1": {
       "process": "npm:process@0.10.1"
     },

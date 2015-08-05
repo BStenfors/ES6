@@ -24,7 +24,7 @@ var users = require('./app/modules/users/routes');
 var app = express();
 
 // view engine setup
-app.set('views', path.join(__dirname, 'views'));
+app.set('views', path.join(__dirname, 'app/views'));
 app.set('view engine', 'hbs');
 
 // uncomment after placing your favicon in /public
