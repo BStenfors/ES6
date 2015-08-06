@@ -15,7 +15,7 @@ gulp.task('serve', function() {
     //server.start();
 
     //use gulp.watch to trigger server actions(notify, start or stop)
-    gulp.watch(['./views/*.hbs', './app/modules/**/*.js', './js/**/*.js'], function () {
+    gulp.watch(['./app/views/*.hbs', './app/modules/**/*.js', './public/js/**/*.js', './public/views/**/*.html'], function () {
         server.notify.apply(server, arguments);
         server.start();
     });
