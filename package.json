@@ -16,12 +16,21 @@
   },
   "devDependencies": {
     "angular-grid": "^1.12.4",
+    "browser-sync": "^2.8.2",
+    "gulp": "^3.9.0",
+    "gulp-connect": "^2.2.0",
+    "gulp-express": "^0.3.5",
+    "gulp-live-server": "0.0.23",
+    "gulp-nodemon": "^2.0.3",
     "jspm": "^0.15.7",
     "mongoose": "^4.1.1"
   },
   "jspm": {
     "directories": {},
-    "dependencies": {},
+    "dependencies": {
+      "angular": "github:angular/bower-angular@^1.4.3",
+      "angular-material": "github:angular/bower-material@^0.10.0"
+    },
     "devDependencies": {
       "babel": "npm:babel-core@^5.1.13",
       "babel-runtime": "npm:babel-runtime@^5.1.13",
