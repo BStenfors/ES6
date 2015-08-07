@@ -1,5 +1,37 @@
-<div layout="row">
+<md-content layout="row" ng-controller="homeCtrl as home">
     <div layout="column">
-        <span> Client side index page </span>
+        <div layout="row">
+            <div layout="column">
+                <span> Users List </span>
+            </div>
+        </div>
+        <div layout="row" layout-padding>
+
+            <div layout="column">
+                <md-input-container>
+                    <label>Name</label>
+                    <input data-ng-model="home.user.name"></input>
+                </md-input-container>
+            </div>
+            <div layout="column">
+                <md-input-container>
+                    <label>Email</label>
+                    <input data-ng-model="home.user.email"></input>
+                </md-input-container>
+            </div>
+            <div layout="column">
+                <md-button ng-click="home.addUser(home)">Add User</md-button>
+            </div>
+        </div>
+        <div layout="row">
+            <div layout="column">
+                <div ag-grid="home.gridOptions" class="ag-fresh" style="height:100%;width:100%;"></div>
+            </div>
+        </div>
+        <div layout="row">
+            <div layout="column">
+                <md-button ng-click="home.removeUser()">Delete Selected User</md-button>
+            </div>
+        </div>
     </div>
-</div>
+</md-content>

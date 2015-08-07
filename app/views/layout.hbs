@@ -3,17 +3,24 @@
   <head>
     <title>{{title}}</title>
     <!--<link rel='stylesheet' href='/stylesheets/style.css' />-->
-    <!--<link rel="stylesheet" href="js/jspm_packages/github/angular/bower-material@0.10.0/angular-material.css" />-->
+    <link rel="stylesheet" href="js/jspm_packages/github/angular/bower-material@0.10.0/angular-material.css" />
+      <link rel="stylesheet" href="js/jspm_packages/npm/angular-grid@1.12.4/dist/angular-grid.css" />
+      <link rel="stylesheet" href="js/jspm_packages/npm/angular-grid@1.12.4/dist/theme-fresh.css" />
     <script src="js/jspm_packages/system.js"></script>
     <script src="js/jspm.config.js"></script>
     <script>
         System.import('js/site');
     </script>
 
-    <script src="//localhost:35729/livereload.js"></script>
+    <!--<script src="//localhost:35729/livereload.js"></script>-->
   </head>
-  <body>
-    {{{body}}}
+  <body layout="column">
+  <md-toolbar layout="row">
+      <button ng-click="toggleSidenav('left')" hide-gt-sm class="menuBtn">
+          <span class="visually-hidden">Menu</span>
+      </button>
+      <h1 class="md-toolbar-tools" layout-align-gt-sm="center">The Playground</h1>
+  </md-toolbar>
+  {{{body}}}
   </body>
-
 </html>

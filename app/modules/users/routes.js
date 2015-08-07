@@ -24,14 +24,13 @@ router.route('/')
        next();
     })
     .get(function(req, res) {
-        //res.render('users',{title: 'Users'});
-        //res.json({message: 'Users loaded'});
-        res.send('Users page');
+
     })
     .post(function(req, res){
         var newUser = new user();
-        newUser.name = 'Bryan';
-        newUser.email = 'bstenfors@email.com';
+        console.log(req.body);
+        newUser.name = req.body.name;
+        newUser.email = req.body.email;
 
         newUser.save(function(err){
             if(err){
@@ -40,5 +39,5 @@ router.route('/')
                 res.json({message: 'User Created!'});
             }
         })
-    })
+    });
 module.exports = router;

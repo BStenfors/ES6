@@ -17,10 +17,10 @@ gulp.task('serve', function() {
     //use gulp.watch to trigger server actions(notify, start or stop)
     gulp.watch(['./app/views/*.hbs', './app/modules/**/*.js', './public/js/**/*.js', './public/views/**/*.html'], function () {
         server.notify.apply(server, arguments);
-        server.start();
+        //server.start();
     });
 
-    gulp.watch('./bin/www', server.start.bind(server)); //restart my server
+    //gulp.watch('./bin/www', server.start.bind(server)); //restart my server
 });
 
 gulp.task('changes', function(){
