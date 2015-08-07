@@ -36,6 +36,7 @@
       "angular-animate": "github:angular/bower-angular-animate@^1.4.3",
       "angular-grid": "npm:angular-grid@^1.12.4",
       "angular-material": "github:angular/bower-material@^0.10.0",
+      "angular-material-icons": "npm:angular-material-icons@^0.5.0",
       "angular-ui-router": "github:angular-ui/ui-router@^0.2.15"
     },
     "devDependencies": {

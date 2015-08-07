@@ -4,8 +4,9 @@
 'use strict'
 
 class HomeCtrl {
-    constructor (homeSvc){
+    constructor (homeSvc, $mdSideNav){
         this.homeSvc = homeSvc;
+        this.$mdSideNav = $mdSideNav;
         this.user = {};
         this.init();
     }
@@ -60,6 +61,6 @@ class HomeCtrl {
     }
 }
 
-HomeCtrl.$inject = ['homeSvc'];
+HomeCtrl.$inject = ['homeSvc', '$mdSideNav'];
 
 export { HomeCtrl }

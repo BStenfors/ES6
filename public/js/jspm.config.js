@@ -19,6 +19,7 @@ System.config({
     "angular-animate": "github:angular/bower-angular-animate@1.4.3",
     "angular-grid": "npm:angular-grid@1.12.4",
     "angular-material": "github:angular/bower-material@0.10.0",
+    "angular-material-icons": "npm:angular-material-icons@0.5.0",
     "angular-ui-router": "github:angular-ui/ui-router@0.2.15",
     "babel": "npm:babel-core@5.8.20",
     "babel-runtime": "npm:babel-runtime@5.8.20",
@@ -48,6 +49,12 @@ System.config({
       "path": "github:jspm/nodelibs-path@0.1.0",
       "process": "github:jspm/nodelibs-process@0.1.1",
       "systemjs-json": "github:systemjs/plugin-json@0.1.0"
+    },
+    "npm:angular-material-icons@0.5.0": {
+      "angular": "npm:angular@1.4.3"
+    },
+    "npm:angular@1.4.3": {
+      "process": "github:jspm/nodelibs-process@0.1.1"
     },
     "npm:babel-runtime@5.8.20": {
       "process": "github:jspm/nodelibs-process@0.1.1"
