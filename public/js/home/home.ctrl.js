@@ -4,11 +4,17 @@
 'use strict'
 
 class HomeCtrl {
-    constructor (homeSvc, $mdSideNav){
+    constructor (homeSvc, sideNavSvc, $mdSidenav){
         this.homeSvc = homeSvc;
-        this.$mdSideNav = $mdSideNav;
+        this.sideNavSvc = sideNavSvc;
+        this.$mdSidenav = $mdSidenav;
         this.user = {};
         this.init();
+    }
+
+    init(){
+        this.initGrid(null);
+        this.loadUsers();
     }
 
     initGrid(rowData){
@@ -24,16 +30,6 @@ class HomeCtrl {
             dontUseScrolls: true // because so little data, no need to use scroll bars
         };
 
-    }
-
-    removeUser(){
-        var self = this;
-        var selectedNodes = this.gridOptions.api.getSelectedNodes();
-        this.homeSvc.removeUser(selectedNodes).then(status =>{
-           if(status.removed == 1){
-               self.loadUsers();
-           }
-        });
     }
 
     addUser(homeData){
@@ -55,12 +51,21 @@ class HomeCtrl {
         });
     }
 
-    init(){
-        this.initGrid(null);
-        this.loadUsers();
+    removeUser(){
+        var self = this;
+        var selectedNodes = this.gridOptions.api.getSelectedNodes();
+        this.homeSvc.removeUser(selectedNodes).then(status =>{
+           if(status.removed == 1){
+               self.loadUsers();
+           }
+        });
+    }
+
+    toggleSideNav(id){
+        $mdSidenav(id).toggle();
     }
 }
 
-HomeCtrl.$inject = ['homeSvc', '$mdSideNav'];
+HomeCtrl.$inject = ['homeSvc', 'sideNavSvc', '$mdSidenav'];
 
 export { HomeCtrl }

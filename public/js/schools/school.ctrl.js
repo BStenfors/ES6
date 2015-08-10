@@ -10,7 +10,6 @@ class SchoolCtrl {
     }
 
     init(){
-
     }
 }
 

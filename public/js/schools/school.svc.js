@@ -8,6 +8,21 @@ class SchoolSvc {
         this.$http = $http;
     }
 
+    getSchools(){
+        let schools = [
+            {
+                name: 'K-State',
+                link: '/kstate'
+            },
+            {
+                name: 'Oklahoma State',
+                link: '/oklahomastate'
+            }
+        ];
+
+        return schools;
+    }
+
     static factory($http){
         return new SchoolSvc($http);
     }

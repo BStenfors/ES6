@@ -9,14 +9,14 @@ import 'angular-grid';
 import 'angular-material-icons';
 
 //Global Modules
-
+import toolBarMod from 'js/toolbar/toolBar.module';
+import sideNaveMod from 'js/sideNav/sideNav.module';
 
 //View specific modules
 import homeMod from 'js/home/home.module';
 import schoolMod from 'js/schools/school.module';
 
-
-angular.module('app', ['app.home', 'app.school', 'ui.router', 'ngMaterial', 'ngMdIcons', 'angularGrid'])
+angular.module('app', ['app.home', 'app.school','app.toolBar','app.sideNav', 'ui.router', 'ngMaterial', 'ngMdIcons', 'angularGrid'])
     .config(function($stateProvider, $urlRouterProvider, $mdThemingProvider){
         $urlRouterProvider.otherwise('/');
 
@@ -30,16 +30,17 @@ angular.module('app', ['app.home', 'app.school', 'ui.router', 'ngMaterial', 'ngM
             templateUrl: 'views/index.html'
         })
 
-        var customBlueMap = 		$mdThemingProvider.extendPalette('light-blue', {
-            'contrastDefaultColor': 'light',
+        //Custom Theming with Angular-Material
+        var customBlueMap = $mdThemingProvider.extendPalette('orange', {
+            'contrastDefaultColor': 'dark',
             'contrastDarkColors': ['50'],
             '50': 'ffffff'
         });
         $mdThemingProvider.definePalette('customBlue', customBlueMap);
         $mdThemingProvider.theme('default')
             .primaryPalette('customBlue', {
-                'default': '500',
-                'hue-1': '50'
+                'default': '800',
+                'hue-1': '500'
             })
             .accentPalette('pink');
         $mdThemingProvider.theme('input', 'default')
