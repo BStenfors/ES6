@@ -4,42 +4,47 @@
             <span flex></span>
             <div layout="column" class="md-toolbar-tools-bottom inset">
                 <user-avatar></user-avatar>
-                <span></span>
-                <div>Firstname Lastname</div>
-                <div>email@domainname.com</div>
+                <!--<span></span>-->
+                <!--<div>Firstname Lastname</div>-->
+                <!--<div>email@domainname.com</div>-->
             </div>
         </md-toolbar>
-        <md-list>
-            <md-item ng-repeat="item in sideNav.menuItems">
-                <a>
+        <md-list ng-controller="sideNavCtrl as sideNav">
+            {{#each menuItems}}
+            <md-item>
+                <a ng-click="sideNav.showView('{{state}}')">
                     <md-item-content md-ink-ripple layout="row" layout-align="start center">
                         <div class="inset">
-                            <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
+                            <ng-md-icon icon="{{icon}}"></ng-md-icon>
                         </div>
-                        <div class="inset">{{item.title}}
+                        <div class="inset">{{title}}
                         </div>
                     </md-item-content>
                 </a>
             </md-item>
+            {{/each}}
             <md-divider></md-divider>
             <md-subheader>Management</md-subheader>
-            <md-item ng-repeat="item in sideNav.adminMenuItems">
-                <a>
-                    <md-item-content md-ink-ripple layout="row" layout-align="start center">
-                        <div class="inset">
-                            <ng-md-icon icon="{{item.icon}}"></ng-md-icon>
-                        </div>
-                        <div class="inset">{{item.title}}
-                        </div>
-                    </md-item-content>
-                </a>
-            </md-item>
+    {{#each adminMenuItems}}
+        <md-item>
+            <a ng-click="sideNav.showView('{{state}}')">
+                <md-item-content md-ink-ripple layout="row" layout-align="start center">
+                    <div class="inset">
+                        <ng-md-icon icon="{{icon}}"></ng-md-icon>
+                    </div>
+                    <div class="inset">{{title}}
+                    </div>
+                </md-item-content>
+            </a>
+        </md-item>
+    {{/each}}
+
         </md-list>
     </md-sidenav>
     <div layout="column" flex id="content">
         <md-content layout="column" flex class="md-padding">
-<div data-ui-view>
-</div>
+            <div data-ui-view>
+            </div>
         </md-content>
     </div>
 </div>

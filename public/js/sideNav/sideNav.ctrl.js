@@ -4,24 +4,30 @@
 'use strict'
 
 class SideNavCtrl {
-    constructor (sideNavSvc, $mdSidenav){
+    constructor (sideNavSvc, $state, $mdSidenav){
         this.sideNavSvc = sideNavSvc;
         this.$mdSidenav = $mdSidenav;
+        this.$state = $state;
         this.menuItems = [];
         this.adminMenuItems = [];
+
         this.init();
     }
 
     init(){
-        this.menuItems = this.sideNavSvc.getMenuItems();
-        this.adminMenuItems = this.sideNavSvc.getAdminMenuItems();
+
+    }
+
+    showView(state){
+        console.log('Menu Item Click: ' + state);
+        this.$state.go(state);
     }
 
     toggleSideNav(id){
-        $mdSidenav(id).toggle();
+        this.$mdSidenav(id).toggle();
     }
 }
 
-SideNavCtrl.$inject = ['sideNavSvc', '$mdSidenav'];
+SideNavCtrl.$inject = ['sideNavSvc', '$state', '$mdSidenav'];
 
 export { SideNavCtrl }

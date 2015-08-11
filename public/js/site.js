@@ -29,6 +29,22 @@ angular.module('app', ['app.home', 'app.school','app.toolBar','app.sideNav', 'ui
             url:'/',
             templateUrl: 'views/index.html'
         })
+        .state('adminMenuItems',{
+               url:'/admin-menu-items',
+               templateUrl: 'views/partials/admin/menuItems.html'
+           })
+        .state('schools',{
+               url: '/schools',
+               templateUrl: 'views/partials/admin/schools.html'
+           })
+           .state('channelGuides',{
+               url: '/channel-guides',
+               templateUrl: 'views/partials/channelGuides.html'
+           })
+           .state('schedules',{
+               url: '/schedules',
+               templateUrl: 'views/partials/schedules.html'
+           })
 
         //Custom Theming with Angular-Material
         var customBlueMap = $mdThemingProvider.extendPalette('orange', {

@@ -11,12 +11,16 @@ class SideNavSvc {
     getMenuItems(){
         let menuItems = [
             {
-                icon: '',
+                icon: 'home',
                 title: 'Home'
             },
             {
-                icon: '',
+                icon: 'dashboard',
                 title: 'Channel Guides'
+            },
+            {
+                icon: 'dashboard',
+                title: 'Schedules'
             }
         ];
 
