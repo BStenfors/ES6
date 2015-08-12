@@ -15,40 +15,36 @@
     <!--<script src="//localhost:35729/livereload.js"></script>-->
   </head>
   <body layout="column">
-  <md-toolbar ng-show="!showSearch" >
-      <div class="md-toolbar-tools" ng-controller="sideNavCtrl as sideNav">
-          <md-button ng-click="sideNav.toggleSideNav('left')" hide-gt-md aria-label="Menu">
+  <div ng-controller="toolBarCtrl as toolBar">
+  <md-toolbar ng-show="!toolBar.showSearch" >
+      <div class="md-toolbar-tools">
+          <md-button ng-click="toolBar.toggleSideNav('left')" hide-gt-md aria-label="Menu">
               <ng-md-icon icon="menu"></ng-md-icon>
           </md-button>
           <h3>
               Dashboard
           </h3>
           <span flex></span>
-          <md-button aria-label="Search" ng-click="showSearch = !showSearch">
+          <md-button aria-label="Search" ng-click="toolBar.showSearch = !toolBar.showSearch">
               <ng-md-icon icon="search"></ng-md-icon>
           </md-button>
           <md-button aria-label="Open Settings" ng-click="showListBottomSheet($event)">
               <ng-md-icon icon="more_vert"></ng-md-icon>
           </md-button>
       </div>
-      <md-tabs md-stretch-tabs class="md-primary" md-selected="data.selectedIndex">
-          <!--<md-tab id="tab1" aria-controls="tab1-content">-->
-              <!--Kansas State-->
-          <!--</md-tab>-->
-          <!--<md-tab id="tab2" aria-controls="tab2-content">-->
-              <!--All Big 12-->
-          <!--</md-tab>-->
-{{#each tabs}}
-    <md-tab >
-        {{name}}
-    </md-tab>
-    {{/each}}
-
+      <md-tabs md-stretch-tabs class="md-primary">
+          {{#each tabs}}
+              <md-tab>
+                  <md-tab-label>
+                     <a ng-click="toolBar.onConferenceChanged({{confId}})"> {{name}}</a>
+                  </md-tab-label>
+              </md-tab>
+          {{/each}}
       </md-tabs>
   </md-toolbar>
-  <md-toolbar class="md-hue-1" ng-show="showSearch">
+  <md-toolbar class="md-hue-1" ng-show="toolBar.showSearch">
       <div class="md-toolbar-tools">
-          <md-button ng-click="showSearch = !showSearch" aria-label="Back">
+          <md-button ng-click="toolBar.showSearch = !toolBar.showSearch" aria-label="Back">
               <ng-md-icon icon="arrow_back"></ng-md-icon>
           </md-button>
           <h3 flex="10">
@@ -58,7 +54,7 @@
               <label>&nbsp;</label>
               <input ng-model="search.who" placeholder="enter search">
           </md-input-container>
-          <md-button aria-label="Search" ng-click="showSearch = !showSearch">
+          <md-button aria-label="Search" ng-click="toolBar.showSearch = !toolBar.showSearch">
               <ng-md-icon icon="search"></ng-md-icon>
           </md-button>
           <md-button aria-label="Open Settings" ng-click="showListBottomSheet($event)">
@@ -66,6 +62,7 @@
           </md-button>
       </div>
   </md-toolbar>
+  </div>
   {{{body}}}
   </body>
 </html>

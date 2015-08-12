@@ -3,7 +3,7 @@
  */
 'use strict'
 
-class ToolBarSvc {
+class MenuItemsSvc {
     constructor($http){
         this.$http = $http;
     }
@@ -38,11 +38,16 @@ class ToolBarSvc {
         return adminMenuItems;
     }
 
+    addMenuItem(itm){
+        let status = this.$http.post('/addMenuItem', itm).then(r => r.data);
+        return status;
+    }
+
     static factory($http){
-        return new ToolBarSvc($http);
+        return new MenuItemsSvc($http);
     }
 }
 
-ToolBarSvc.factory.$inject = ['$http'];
+MenuItemsSvc.factory.$inject = ['$http'];
 
-export {ToolBarSvc}
+export {MenuItemsSvc}

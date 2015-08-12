@@ -10,7 +10,7 @@ class SideNavCtrl {
         this.$state = $state;
         this.menuItems = [];
         this.adminMenuItems = [];
-
+        this.showSearch = false;
         this.init();
     }
 

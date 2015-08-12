@@ -4,9 +4,10 @@
 'use strict'
 
 class ToolBarCtrl {
-    constructor (toolBarSvc, schoolsSvc, $mdSidenav){
+    constructor (toolBarSvc, schoolSvc, $mdSidenav){
         this.toolBarSvc = toolBarSvc;
         this.$mdSidenav = $mdSidenav;
+        this.schoolSvc = schoolSvc;
         this.tabs = [];
         this.init();
     }
@@ -18,14 +19,18 @@ class ToolBarCtrl {
     init(){
         //this.menuItems = this.sideNavSvc.getMenuItems();
         //this.adminMenuItems = this.sideNavSvc.getAdminMenuItems();
-        this.getTabs();
+        //this.getTabs();
     }
 
     toggleSideNav(id){
-        $mdSidenav(id).toggle();
+        this.$mdSidenav(id).toggle();
+    }
+
+    onConferenceChanged(confId){
+        this.schoolSvc.setSelectedConferenceId(confId);
     }
 }
 
-ToolBarCtrl.$inject = ['toolBarSvc', 'schoolsSvc', '$mdSidenav'];
+ToolBarCtrl.$inject = ['toolBarSvc', 'schoolSvc', '$mdSidenav'];
 
 export { ToolBarCtrl }

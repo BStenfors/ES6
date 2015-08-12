@@ -17,6 +17,7 @@ mongoose.connect('mongodb://localhost:27017/researchDev', function(err, db){
 });
 
 var user = require('./app/modules/users/model');
+var menuItem = require('./app/modules/menuItems/model');
 
 //route files
 var routes = require('./app/modules/home/routes');
