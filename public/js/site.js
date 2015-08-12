@@ -16,8 +16,9 @@ import sideNaveMod from 'js/sideNav/sideNav.module';
 import homeMod from 'js/home/home.module';
 import schoolMod from 'js/schools/school.module';
 import menuItemsMod from 'js/menuItems/menuItems.module';
+import channelGuideMod from 'js/channelGuides/channelGuides.module';
 
-angular.module('app', ['app.home', 'app.school','app.toolBar','app.sideNav', 'app.menuItems', 'ui.router', 'ngMaterial', 'ngMdIcons', 'angularGrid'])
+angular.module('app', ['app.home', 'app.school','app.toolBar','app.sideNav', 'app.menuItems', 'app.channelGuides', 'ui.router', 'ngMaterial', 'ngMdIcons', 'angularGrid'])
     .config(function($stateProvider, $urlRouterProvider, $mdThemingProvider){
         $urlRouterProvider.otherwise('/');
 

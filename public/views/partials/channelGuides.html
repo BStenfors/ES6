@@ -1,5 +1,10 @@
-<div layout="row">
-    <md-content layout="column" flex class="md-padding">
-        <span>Channel guides list will go here</span>
+<div layout="row" ng-controller="channelGuideCtrl as channelGuides">
+    <md-content layout="column" flex class="md-padding" ng-repeat="guide in channelGuides.guides">
+        <md-card>
+            <md-card-content>
+                <h2>{{guide.SchoolName}}</h2>
+                <h5>{{guide.Filter}}</h5>
+            </md-card-content>
+        </md-card>
     </md-content>
 </div>

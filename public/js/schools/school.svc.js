@@ -28,6 +28,13 @@ class SchoolSvc {
         return schools;
     }
 
+    getActiveChannelGuides(){
+        //http://stage.services.collegesportsvision.com/api/channelguide/GetActiveChannelGuideChannels
+        let guides = null;
+        guides = this.$http.get('http://stage.services.collegesportsvision.com/api/channelguide/GetActiveChannelGuideChannels');
+        return guides;
+    }
+
     static factory($http){
         return new SchoolSvc($http);
     }
