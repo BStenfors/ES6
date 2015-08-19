@@ -63,6 +63,7 @@ angular.module('app', ['app.home', 'app.school','app.toolBar','app.sideNav', 'ap
             .accentPalette('pink');
         $mdThemingProvider.theme('input', 'default')
             .primaryPalette('grey')
+            .backgroundPalette('grey')
     });
 
 console.log(angular.version);

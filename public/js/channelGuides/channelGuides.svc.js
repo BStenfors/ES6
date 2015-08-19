@@ -16,6 +16,18 @@ class ChannelGuideSvc {
         this.channelGuideId = val;
     }
 
+    getActiveChannelGuideByTypeSchoolId(typeId, schoolId){
+        let guide = null;
+        guide = this.$http(
+            {
+                url: 'http://stage.services.collegesportsvision.com/api/pagecontent/GetActiveWeeklyChannelGuideByTypeBySchoolId',
+                method: 'GET',
+                params: {_id: typeId, _schoolId: schoolId}
+            });
+        return guide;
+
+    }
+
     getActiveChannelGuides(){
         //http://stage.services.collegesportsvision.com/api/channelguide/GetActiveChannelGuideChannels
         let guides = null;
