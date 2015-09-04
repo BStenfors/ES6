@@ -35,6 +35,12 @@ class ChannelGuideSvc {
         return guides;
     }
 
+    getChannelGuideChannelsByChannelGuideId(guideId){
+        let guides = null;
+        guides = this.$http.get('http://stage.collegesportsvision.com/pagecontentservice.asmx/GetActiveWeeklyChannelGuideChannels?_weeklyChannelGuideId=' + guideId);
+        return guides;
+    }
+
     static factory($http){
         return new ChannelGuideSvc($http);
     }

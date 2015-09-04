@@ -6,6 +6,7 @@ var menuItem = mongoose.model('MenuItem');
 
 /* GET home page. */
 router.get('/', function(req, res, next) {
+  var loggedIn = false;
   var schools = [
     {
       name: 'Big 12',
@@ -44,6 +45,7 @@ router.get('/', function(req, res, next) {
     }
 
   });
+
   var _adminMenuItems = [
     {
       icon: 'menu',
@@ -56,8 +58,53 @@ router.get('/', function(req, res, next) {
       state: 'schools'
     }
   ];
-  res.render('index', { title: 'The Playground', tabs: schools, menuItems: _menuItems, adminMenuItems: _adminMenuItems });
+  if(!loggedIn){
+    res.render('login', { title: 'Please Login to the Playground' });
+  }else{
+    res.render('index',
+        {
+          title: 'The Playground',
+          tabs: schools,
+          menuItems: _menuItems,
+          adminMenuItems: _adminMenuItems
+        }
+    );
+  }
 });
+
+//Account / User Routes
+router.post('/login', function(req, res, next){
+  console.log('Trying to log in.');
+  passport.authenticate('local',
+      {
+        successRedirect: '/',
+        failureRedirect: '/login'
+      }
+  )
+});
+
+router.get('/register', function(req,res,next){
+  res.render('register', {title: 'Register for the Playground'});
+});
+
+router.post('/createUser', function(req, res, next){
+  var newUser = new user();
+  console.log(req.body);
+  newUser.email = req.body.email;
+  newUser.password = req.body.password;
+
+  newUser.save(function(err){
+    if(err){
+      res.send(err);
+      console.log('Error creating user: ' + err);
+    }else{
+      console.log('User created!');
+      res.json({success: 'true'});
+    }
+  })
+});
+//Account / User Routes
+
 router.get('/usersList',function(req, res, next){
   user.find({}, function(err, docs){
     console.log(docs);
@@ -73,7 +120,8 @@ router.put('/userDelete', function(req, res, next){
       res.json({removed: removed.result.ok});
     }
   });
-})
+});
+
 router.post('/addMenuItem', function(req, res, next){
   var newMenuItem = new menuItem();
   console.log(req.body);
@@ -87,6 +135,7 @@ router.post('/addMenuItem', function(req, res, next){
     }else{
       res.json({message: 'Menu Item Created!'});
     }
-  })
-})
+  });
+});
+
 module.exports = router;

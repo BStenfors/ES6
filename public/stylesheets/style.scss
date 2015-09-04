@@ -1,12 +1,16 @@
 md-tab-content {
   opacity: 0;
-  transition: opacity 1s ease-in-out;
-  -moz-transition: opacity 1s ease-in-out;
-  -webkit-transition: opacity 1s ease-in-out;
+  transition: opacity 2s ease-in-out;
+  -moz-transition: opacity 2s ease-in-out;
+  -webkit-transition: opacity 2s ease-in-out;
 
 &.md-active {
    opacity: 1;
  }
+
+&.md-no-transition {
+  transition: none;
+}
 
 &.md-left,
 &.md-right {

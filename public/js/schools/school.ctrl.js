@@ -13,13 +13,13 @@ class SchoolCtrl {
 
     init(){
         let self = this;
-        this.getSchools();
+        this.getSchools(1);
         //this.$scope.$watch('this.schoolSvc.selectedConferenceId', function(current, old){
         //    self.getSchools(current);
         //})
-        this.$scope.$watch(function(){return self.schoolSvc.getSelectedConferenceId()}, function(current, old){
-           self.getSchools(current);
-        });
+        //this.$scope.$watch(function(){return self.schoolSvc.getSelectedConferenceId()}, function(current, old){
+        //   self.getSchools(current);
+        //});
     }
 
     getSchools(confId){

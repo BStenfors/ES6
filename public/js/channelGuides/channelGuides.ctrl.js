@@ -11,6 +11,8 @@ class ChannelGuideCtrl {
         this.$scope = $scope;
 
         this.activeGuide = {};
+        this.activeFootballGuide = {};
+        this.activeBasketballGuide = {};
         this.schools = [];
         this.guides = [];
         this.init();
@@ -50,6 +52,26 @@ class ChannelGuideCtrl {
         if(guidePromise != null){
             guidePromise.then(function(guide){
                 self.activeGuide = guide.data;
+            })
+        }
+    }
+
+    getActiveSchoolFootballChannelGuide(schoolId){
+        var self = this;
+        let guidePromise = this.channelGuideSvc.getActiveChannelGuideByTypeSchoolId(1, schoolId);
+        if(guidePromise != null){
+            guidePromise.then(function(guide){
+                self.activeFootballGuide = guide.data;
+            })
+        }
+    }
+
+    getActiveSchoolBasketballChannelGuide(schoolId){
+        var self = this;
+        let guidePromise = this.channelGuideSvc.getActiveChannelGuideByTypeSchoolId(2, schoolId);
+        if(guidePromise != null){
+            guidePromise.then(function(guide){
+                self.activeBasketballGuide = guide.data;
             })
         }
     }
