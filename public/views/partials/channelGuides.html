@@ -1,5 +1,92 @@
-<div layout="row">
-    <md-content layout="column" flex class="md-padding">
-        <span>Channel guides list will go here</span>
-    </md-content>
+<div layout="row" ng-controller="channelGuideCtrl as channelGuides">
+    <md-tabs md-stretch-tabs class="md-primary">
+        <md-tab data-ng-repeat="school in channelGuides.schools">
+            <md-tab-label>
+            <a data-ng-click="channelGuides.getActiveSchoolFootballChannelGuide(school.ID)"> {{school.Name}}</a>
+            </md-tab-label>
+            <md-tab-body>
+                <md-content>
+                    <md-card>
+                        <md-card-content>
+                            <h2>Channel Guides</h2>
+
+                            <!--<md-tabs>-->
+                                <!--<md-tab>-->
+                                    <!--<md-tab-label>-->
+                                        <!--<a data-ng-click="channelGuides.getActiveSchoolFootballChannelGuide(school.ID)">Football</a>-->
+                                    <!--</md-tab-label>-->
+                                    <!--<md-tab-body>-->
+                                        <!--<md-list>-->
+                                        <!--<md-list-item>-->
+                                        <!--<h5>{{channelGuides.activeFootballGuide.Name}}</h5>-->
+                                        <!--</md-list-item>-->
+                                        <!--</md-list>-->
+                                    <!--</md-tab-body>-->
+                                <!--</md-tab>-->
+                                <!--<md-tab>-->
+                                    <!--<md-tab-label>-->
+                                        <!--<a data-ng-click="channelGuides.getActiveSchoolBasketballChannelGuide(school.ID)">Basketball</a>-->
+                                    <!--</md-tab-label>-->
+                                    <!--<md-tab-body>-->
+                                        <!--<md-list>-->
+                                        <!--<md-list-item>-->
+                                        <!--<h5>{{channelGuides.activeBasketballGuide.Name}}</h5>-->
+                                        <!--</md-list-item>-->
+                                        <!--</md-list>-->
+                                    <!--</md-tab-body>-->
+                                <!--</md-tab>-->
+                            <!--</md-tabs>-->
+                        </md-card-content>
+                    </md-card>
+                </md-content>
+            </md-tab-body>
+        </md-tab>
+    </md-tabs>
+    <!--<md-content layout="column" flex class="md-padding" ng-repeat="guide in channelGuides.guides">-->
+        <!--<md-card>-->
+            <!--<md-card-content>-->
+                <!--<h2>{{guide.SchoolName}}</h2>-->
+                <!--<h5>{{guide.Filter}}</h5>-->
+            <!--</md-card-content>-->
+        <!--</md-card>-->
+    <!--</md-content>-->
+    <!--<md-content flex>-->
+        <!--<md-list>-->
+            <!--<md-list-item>-->
+                <!--<md-card>-->
+                    <!--<md-card-content>-->
+                        <!--Left card 1-->
+                    <!--</md-card-content>-->
+                <!--</md-card>-->
+            <!--</md-list-item>-->
+            <!--<md-divider></md-divider>-->
+            <!--<md-list-item>-->
+                <!--<md-card>-->
+                    <!--<md-card-content>-->
+                        <!--Left card 2-->
+                    <!--</md-card-content>-->
+                <!--</md-card>-->
+            <!--</md-list-item>-->
+        <!--</md-list>-->
+    <!--</md-content>-->
+    <!--<md-content flex>-->
+        <!--<md-list>-->
+            <!--<md-list-item>-->
+                <!--<md-card>-->
+                    <!--<md-card-content>-->
+                        <!--Right card 1-->
+                    <!--</md-card-content>-->
+                <!--</md-card>-->
+            <!--</md-list-item>-->
+            <!--<md-divider></md-divider>-->
+            <!--<md-list-item>-->
+                <!--<md-card>-->
+                    <!--<md-card-content>-->
+                        <!--Right card 2-->
+                    <!--</md-card-content>-->
+                <!--</md-card>-->
+            <!--</md-list-item>-->
+
+        <!--</md-list>-->
+    <!--</md-content>-->
 </div>

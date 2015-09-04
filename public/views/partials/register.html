@@ -1,0 +1,30 @@
+<div layout="row" flext>
+    <div layout="column" flex>
+        <md-content layout="column" flex class="md-padding">
+            <h2>Registration</h2>
+        </md-content>
+    </div>
+</div>
+<div layout="row" flex ng-controller="registerCtrl as register">
+    <div layout="column" flex id="content">
+        <md-content layout="column" flex class="md-padding">
+            <form>
+                <md-card>
+                    <md-card-content>
+                        <md-input-container>
+                            <label>Username</label>
+                            <input type="text" name="user.Username" data-ng-model="register.user.Username" />
+                        </md-input-container>
+                        <md-input-container>
+                            <label>Password</label>
+                            <input type="password" name="user.Password" data-ng-model="register.user.Password" />
+                        </md-input-container>
+                        <div class="md-actions" layout="row" layout-align="end center">
+                            <md-button ng-click="register.createUser(register)">Register</md-button>
+                        </div>
+                    </md-card-content>
+                </md-card>
+            </form>
+        </md-content>
+    </div>
+</div>
