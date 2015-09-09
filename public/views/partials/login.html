@@ -13,17 +13,17 @@
                     <md-card-content>
                         <md-input-container>
                             <label>Username</label>
-                            <input type="text" name="user.Username" data-ng-model="user.Username" />
+                            <input type="text" name="user.username" data-ng-model="login.user.username" />
                         </md-input-container>
                         <md-input-container>
                             <label>Password</label>
-                            <input type="text" name="user.Username" data-ng-model="user.Username" />
+                            <input type="password" name="user.password" data-ng-model="login.user.password" />
                         </md-input-container>
                         <div class="md-actions" layout="row" layout-align="end center">
                             <md-button ng-click="login.createAccount()">Create Account</md-button>
                             <md-button>Login with Facebook</md-button>
                             <md-button>Login with Google</md-button>
-                            <md-button ng-click="login.login(user)">Log In</md-button>
+                            <md-button ng-click="login.login(login)">Log In</md-button>
                         </div>
                     </md-card-content>
                 </md-card>

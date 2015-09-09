@@ -9,7 +9,7 @@ class RegisterSvc {
     }
 
     registerUser(userData){
-        let status = this.$http.post('/users', userData).then(r => r.data);
+        let status = this.$http.post('/registerNewUser', userData).then(r => r.data);
         return status;
     }
 

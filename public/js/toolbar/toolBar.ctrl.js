@@ -4,11 +4,14 @@
 'use strict'
 
 class ToolBarCtrl {
-    constructor (toolBarSvc, schoolSvc, $mdSidenav){
+    constructor (toolBarSvc, schoolSvc, $mdSidenav, $mdDialog){
+        //this.$mdOpenMenu = $mdOpenMenu;
+        this.$mdDialog = $mdDialog;
         this.toolBarSvc = toolBarSvc;
         this.$mdSidenav = $mdSidenav;
         this.schoolSvc = schoolSvc;
         this.tabs = [];
+        //this.originatorEv = null;
         this.init();
     }
 
@@ -22,6 +25,13 @@ class ToolBarCtrl {
         //this.getTabs();
     }
 
+
+    openMenu() {
+        //this.originatorEv;
+        //this.$mdOpenMenu();
+        alert('opening menu');
+    };
+
     toggleSideNav(id){
         this.$mdSidenav(id).toggle();
     }
@@ -31,6 +41,6 @@ class ToolBarCtrl {
     }
 }
 
-ToolBarCtrl.$inject = ['toolBarSvc', 'schoolSvc', '$mdSidenav'];
+ToolBarCtrl.$inject = ['toolBarSvc', 'schoolSvc', '$mdSidenav', '$mdDialog'];
 
 export { ToolBarCtrl }

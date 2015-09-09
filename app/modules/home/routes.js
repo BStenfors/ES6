@@ -1,66 +1,76 @@
+var passport = require('passport');
 var express = require('express');
 var router = express.Router();
 var mongoose = require('mongoose');
 var user = mongoose.model('User');
 var menuItem = mongoose.model('MenuItem');
 
+
 /* GET home page. */
 router.get('/', function(req, res, next) {
   var loggedIn = false;
-  var schools = [
-    {
-      name: 'Big 12',
-      confId: 1,
-      route: '#/conference/1'
-    },
-    {
-      name: 'SEC',
-      confId: 2,
-      route: '#/conference/2'
-    }
-  ];
-  var _menuItems = [
-    {
-      icon: 'home',
-      label: 'Home',
-      state: 'home'
-    },
-    {
-      icon: 'settings_remote',
-      label: 'Channel Guides',
-      state: 'channelGuides'
-    },
-    {
-      icon: 'schedule',
-      label: 'Schedules',
-      state: 'schedules'
-    }
-  ];
+  if(typeof req.user != 'undefined' && req.user != null){
+    console.log(req.user.username + ' Logged in: ' + req.isAuthenticated());
+  }
 
-  menuItem.find({}, function(err, docs){
-    console.log('Menu items err: ' + err);
-    console.log('Menu Items docs: ' + docs);
-    for(var idx in docs){
-      _menuItems.push(docs[idx]._doc);
-    }
+  //If user is not authenticated redirect the user to the login view
+  var loggedIn = req.isAuthenticated();
+  if(!loggedIn) {
+    res.redirect('/login');
+  }
 
-  });
+  //If user is authenticated render the index view
+    var schools = [
+      {
+        name: 'Big 12',
+        confId: 1,
+        route: '#/conference/1'
+      },
+      {
+        name: 'SEC',
+        confId: 2,
+        route: '#/conference/2'
+      }
+    ];
+    var _menuItems = [
+      {
+        icon: 'home',
+        label: 'Home',
+        state: 'home'
+      },
+      {
+        icon: 'settings_remote',
+        label: 'Channel Guides',
+        state: 'channelGuides'
+      },
+      {
+        icon: 'schedule',
+        label: 'Schedules',
+        state: 'schedules'
+      }
+    ];
+    var _adminMenuItems = [
+      {
+        icon: 'menu',
+        title: 'Menu Items',
+        state: 'adminMenuItems'
+      },
+      {
+        icon: 'school',
+        title: 'Schools',
+        state: 'schools'
+      }
+    ];
 
-  var _adminMenuItems = [
-    {
-      icon: 'menu',
-      title: 'Menu Items',
-      state: 'adminMenuItems'
-    },
-    {
-      icon: 'school',
-      title: 'Schools',
-      state: 'schools'
-    }
-  ];
-  if(!loggedIn){
-    res.render('login', { title: 'Please Login to the Playground' });
-  }else{
+    //menuItem.find({}, function(err, docs){
+    //  console.log('Menu items err: ' + err);
+    //  console.log('Menu Items docs: ' + docs);
+    //  for(var idx in docs){
+    //    _menuItems.push(docs[idx]._doc);
+    //  }
+    //
+    //});
+
     res.render('index',
         {
           title: 'The Playground',
@@ -69,22 +79,47 @@ router.get('/', function(req, res, next) {
           adminMenuItems: _adminMenuItems
         }
     );
-  }
 });
 
 //Account / User Routes
-router.post('/login', function(req, res, next){
-  console.log('Trying to log in.');
-  passport.authenticate('local',
-      {
-        successRedirect: '/',
-        failureRedirect: '/login'
-      }
-  )
+//router.post('/login', function(req, res, next){
+//  console.log('Trying to log in.');
+//  passport.authenticate('local',
+//      {
+//        successRedirect: '/register',
+//        failureRedirect: '/'
+//      }
+//  )
+//});
+
+router.get('/index/:username', function(req, res, next){
+  res.render('index');
+});
+
+router.post('/login', passport.authenticate('local'), function(req, res, next) {
+  //res.json({user: req.user, loggedIn: true});
+  res.redirect('/');
+});
+
+router.get('/login', function(req, res, next){
+  res.render('login', {title: 'Login to the Playground!'});
 });
 
 router.get('/register', function(req,res,next){
   res.render('register', {title: 'Register for the Playground'});
+});
+
+router.post('/registerNewUser', function(req, res, next){
+  console.log(req.body);
+  user.register(new user({ username : req.body.username }), req.body.password, function(err, account) {
+    if (err) {
+      return res.render('register', { user : user });
+    }
+    console.log('New user: ' + req.body.username);
+    passport.authenticate('local')(req, res, function () {
+      res.redirect('/index/' + req.user.username);
+    });
+  });
 });
 
 router.post('/createUser', function(req, res, next){

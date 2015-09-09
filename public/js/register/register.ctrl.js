@@ -18,8 +18,8 @@ class RegisterCtrl {
         var self = this;
         this.registerSvc.registerUser(userData.user).then(status =>{
             if(status.message === "User Created!"){
-                self.user.name = '';
-                self.user.email = '';
+                self.user.Username = '';
+                self.user.password = '';
             }
         });
     }

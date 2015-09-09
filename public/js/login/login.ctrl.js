@@ -17,9 +17,11 @@ class LoginCtrl {
     login(loginData){
         var self = this;
         this.loginSvc.login(loginData.user).then(status =>{
-            if(status.message === "User Created!"){
-                self.user.name = '';
-                self.user.email = '';
+            if(status.loggedIn){
+                this.loginSvc.userLoggedIn = true;
+                this.$state.go('/');
+            }else{
+                this.$state.go('login');
             }
         });
     }

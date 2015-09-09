@@ -9,9 +9,8 @@ var Schema = mongoose.Schema;
 var UserSchema = new Schema({
     name: String,
     email: String,
-    password: {type: String, set: function(newValue){
-        return hash.isHashed(newValue) ? newValue : hash.generate(newValue);
-    }},
+    username: String,
+    password: String,
     theme: String
 });
 
