@@ -10,6 +10,8 @@
             </div>
         </md-toolbar>
         <md-list ng-controller="sideNavCtrl as sideNav">
+
+
             {{#each menuItems}}
             <md-item>
                 <a ng-click="sideNav.showView('{{state}}')">
@@ -42,6 +44,9 @@
         </md-list>
     </md-sidenav>
     <div layout="column" flex id="content">
+        <span>
+            {{menuItems.length}}
+        </span>
         <md-content layout="column" flex class="md-padding">
             <div data-ui-view>
             </div>

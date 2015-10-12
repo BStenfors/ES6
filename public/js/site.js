@@ -27,14 +27,17 @@ angular.module('app', ['app.login', 'app.register', 'app.home', 'app.school','ap
 
         $rootScope.$on('$stateChangeStart', function (event, next, current) {
             //Send the user to the login page if they haven't logged in yet, and it's not the login page
-            //if(!loginSvc.isLoggedIn() && next.name != "Login"){
-            //  $state.go("login");
-            //};
+            let loggedIn = loginSvc.loggedIn;
+
+            if(typeof loggedIn != 'undefined' && !loggedIn && next.name != "login"){
+                event.preventDefault();
+                $state.go("login");
+            }
         });
 
     })
-    .config(function($stateProvider, $urlRouterProvider, $mdThemingProvider){
-        $urlRouterProvider.otherwise('/login');
+    .config(function($stateProvider, $urlRouterProvider, $mdThemingProvider, $locationProvider){
+        $urlRouterProvider.otherwise('/');
 
        $stateProvider
            .state('login',{
@@ -69,6 +72,8 @@ angular.module('app', ['app.login', 'app.register', 'app.home', 'app.school','ap
                url: '/schedules',
                templateUrl: 'views/partials/schedules.html'
            })
+
+        $locationProvider.html5Mode(true);
 
         var customPrimary = {
             '50': '#404040',

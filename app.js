@@ -3,24 +3,19 @@ var path = require('path');
 var favicon = require('serve-favicon');
 var logger = require('morgan');
 var cookieParser = require('cookie-parser');
-
 var bodyParser = require('body-parser');
 var multer = require('multer');
+var mongoose   = require('mongoose');
 var passport = require('passport');
 var LocalStrategy = require('passport-local').Strategy;
 
-
-
-//DB configuration
-var mongoose   = require('mongoose');
-mongoose.connect('mongodb://localhost:27017/researchDev', function(err, db){
-  if(!err){
-    console.log('We are connected to researchDev!');
-  }
-});
-
+//models
 var user = require('./app/modules/users/model');
 var menuItem = require('./app/modules/menuItems/model');
+
+//route files
+var routes = require('./app/modules/home/routes');
+var users = require('./app/modules/users/routes');
 
 
 
@@ -46,31 +41,30 @@ app.use(passport.initialize());
 app.use(passport.session());
 app.use(express.static(path.join(__dirname, 'public')));
 
-// Make our db accessible to our router
-//app.use(function(req,res,next){
-//  req.db = db;
-//  next();
-//});
+app.use('/', routes);
+//app.use('/users', users);
+
+
 
 // passport config
 passport.use(user.createStrategy());
 passport.serializeUser(user.serializeUser());
 passport.deserializeUser(user.deserializeUser());
 
-//route files
-var routes = require('./app/modules/home/routes');
-var users = require('./app/modules/users/routes');
+//DB configuration
 
-app.use('/', routes);
-app.use('/users', users);
-
-
+mongoose.connect('mongodb://localhost:27017/researchDev', function(err, db){
+  if(!err){
+    console.log('We are connected to researchDev!');
+  }
+});
 
 // catch 404 and forward to error handler
-app.use(function(req, res, next) {
-  var err = new Error('Not Found');
+app.use(function(err, req, res, next) {
+  //var err = new Error('Not Found');
   err.status = 404;
-  next(err);
+  console.log(err.stack);
+  //next(err);
 });
 
 // error handlers
@@ -80,6 +74,7 @@ app.use(function(req, res, next) {
 if (app.get('env') === 'development') {
   app.use(function(err, req, res, next) {
     res.status(err.status || 500);
+    console.log(err.stack);
     res.render('error', {
       message: err.message,
       error: err
@@ -91,6 +86,7 @@ if (app.get('env') === 'development') {
 // no stacktraces leaked to user
 app.use(function(err, req, res, next) {
   res.status(err.status || 500);
+  console.log(err.stack);
   res.render('error', {
     message: err.message,
     error: {}

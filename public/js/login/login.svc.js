@@ -10,17 +10,17 @@ class LoginSvc {
     }
 
     //properties
-    get userLoggedIn() { return this.loggedIn;}
-    set userLoggedIn(val) {this.loggedIn = val;}
+    //get userLoggedIn() { return this.loggedIn;}
+    //set userLoggedIn(val) {this.loggedIn = val;}
     //properties
 
     login(userData){
-        let status = this.$http.post('/login', userData).then(r => r.data);
+        let status = this.$http.post('/login', userData);
         return status;
     }
 
     isLoggedIn(){
-        return this.userLoggedIn;
+        return this.loggedIn;
     }
 
     static factory($http){
