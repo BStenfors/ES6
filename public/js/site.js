@@ -29,10 +29,10 @@ angular.module('app', ['app.login', 'app.register', 'app.home', 'app.school','ap
             //Send the user to the login page if they haven't logged in yet, and it's not the login page
             let loggedIn = loginSvc.loggedIn;
 
-            if(typeof loggedIn != 'undefined' && !loggedIn && next.name != "login"){
-                event.preventDefault();
-                $state.go("login");
-            }
+            //if(typeof loggedIn != 'undefined' && !loggedIn && next.name != "login"){
+            //    event.preventDefault();
+            //    $state.go("login");
+            //}
         });
 
     })
@@ -40,10 +40,10 @@ angular.module('app', ['app.login', 'app.register', 'app.home', 'app.school','ap
         $urlRouterProvider.otherwise('/');
 
        $stateProvider
-           .state('login',{
-               url: '/login',
-               templateUrl: 'views/partials/login.html'
-           })
+           //.state('login',{
+           //    url: '/login',
+           //    templateUrl: 'views/partials/login.html'
+           //})
         .state('register',{
                url: '/register',
                templateUrl: 'views/partials/register.html'

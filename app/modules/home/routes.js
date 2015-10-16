@@ -13,7 +13,8 @@ router.get('/', function(req, res, next) {
 
   //If user is not authenticated redirect the user to the login view
   var loggedIn = req.isAuthenticated();
-  if(loggedIn) {
+  if(loggedIn)
+  {
     if(typeof req.user != 'undefined' && req.user != null){
       console.log(req.user.username + ' Logged in: ' + req.isAuthenticated());
     }
@@ -61,16 +62,16 @@ router.get('/', function(req, res, next) {
       }
     ];
 
-    menuItem.find({}, function(err, docs){
-      //console.log('Menu items err: ' + err);
-      if(docs != null){
-        console.log('Menu Items docs: ' + docs);
-        for(var idx in docs){
-          _menuItems.push(docs[idx]._doc);
-        }
-      }
-    });
-
+    //menuItem.find({}, function(err, docs){
+    //  //console.log('Menu items err: ' + err);
+    //  if(docs != null){
+    //    console.log('Menu Items docs: ' + docs);
+    //    for(var idx in docs){
+    //      _menuItems.push(docs[idx]._doc);
+    //    }
+    //  }
+    //});
+    console.log('next line is rendering the index');
     res.render('index',
         {
           title: 'The Playground',
@@ -81,36 +82,25 @@ router.get('/', function(req, res, next) {
           authenticated: req.isAuthenticated()
         }
     );
-  }else{
-    res.redirect('/login');
+  }
+  else
+  {
+    res.render('login');
   }
 });
 
 //Account / User Routes
-router.post('/login', function(req, res, next){
-  console.log('Trying to log in.');
-  passport.authenticate('local',function(err, user, info){
-      //successRedirect: '/',
-      //failureRedirect: '/login'
-      //function(err, user, info){
-      //  if(err){
-      //    console.log('Login Error: ' + err);
-      //  }else{
-      //    res.redirect('/');
-      //  }
-      if(!err){
-        //res.status(200).json(
-        //    {
-        //      user: req.user,
-        //      tabs: schools,
-        //      menuItems: _menuItems,
-        //      adminMenuItems: _adminMenuItems,
-        //      authenticated: req.authenticated()
-        //    }
-        //);
-        res.redirect('/');
-      }
-      })(req, res, next);
+//router.post('/login', function(req, res, next){
+//  passport.authenticate('local',
+//      function (err, user, inf) {
+//        if (!err) {
+//          res.status(200).redirect('/');
+//        }
+//      }
+//  )(req, res, next);
+//});
+router.post('/login', passport.authenticate('local'), function(req, res) {
+  res.status(200).redirect('/');
 });
 
 router.get('/index/:username', function(req, res, next){
@@ -173,7 +163,7 @@ router.get('/index/:username', function(req, res, next){
 
 router.get('/login', function(req, res, next){
   console.log('Login Request');
-  res.render('login', {title: 'Login to the Playground!'});
+  res.redirect('/');
 });
 
 router.get('/register', function(req,res,next){

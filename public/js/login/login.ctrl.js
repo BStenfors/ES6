@@ -17,12 +17,12 @@ class LoginCtrl {
     login(loginData){
         var self = this;
         this.loginSvc.login(loginData.user).then(status =>{
-            //if(status.status === 200){
-            //    this.loginSvc.loggedIn = true;
-            //    this.$state.go('home');
-            //}else{
-            //    this.$state.go('login');
-            //}
+            if(status.status === 200){
+                this.loginSvc.loggedIn = true;
+                this.$state.go('home');
+            }else{
+                this.$state.go('login');
+            }
         });
     }
 
