@@ -47,6 +47,7 @@ gridsModule.controller('mainController', function($scope) {
 
     $scope.colCount = 20;
     $scope.rowCount = 100;
+    $scope.pinnedColumnCount = 0;
 
     $scope.size = 'fill'; // model for size select
     $scope.width = '100%'; // the div gets it's width and height from here
@@ -69,6 +70,7 @@ gridsModule.controller('mainController', function($scope) {
         groupDefaultExpanded: true, //one of [true, false], or an integer if greater than 1
 //            headerHeight: 100, // set to an integer, default is 25, or 50 if grouping columns
         groupSuppressAutoColumn: true,
+        //groupSuppressBlankHeader: true,
         groupIncludeFooter: false,
         groupHidePivotColumns: true,
         //unSortIcon: true,
@@ -83,10 +85,8 @@ gridsModule.controller('mainController', function($scope) {
         suppressRowClickSelection: true, // if true, clicking rows doesn't select (useful for checkbox selection)
         //groupColumnDef: groupColumn,
         //suppressCellSelection: true,
-        //suppressUnSort: true,
-        //suppressDescSort: true,
         //suppressMultiSort: true,
-        showToolPanel: true,
+        showToolPanel: false,
         //toolPanelSuppressPivot: true,
         //toolPanelSuppressValues: true,
         //groupSuppressAutoColumn: true,
@@ -120,7 +120,7 @@ gridsModule.controller('mainController', function($scope) {
 
         // callback when row clicked
         rowClicked: function(params) {
-            //console.log("Callback rowClicked: " + params.data + " - " + params.event);
+            console.log("Callback rowClicked: " + params.data + " - " + params.event);
         },
         // callback when cell clicked
         cellClicked: function(params) {
@@ -144,7 +144,7 @@ gridsModule.controller('mainController', function($scope) {
         field: "name",
         headerGroup: 'Participant',
         width: 200,
-        editable: editableFunc,
+        editable: true,
         filter: PersonFilter,
             cellRenderer: {
                 renderer: "group",
@@ -157,7 +157,7 @@ gridsModule.controller('mainController', function($scope) {
     };
 
     //var groupColumn = {
-    //    headerName: "Name", field: "name", headerGroup: 'Participant', width: 200, editable: editableFunc, filter: PersonFilter,
+    //    headerName: "Name", field: "name", headerGroup: 'Participant', width: 200, editable: true, filter: PersonFilter,
     //    cellRenderer: {
     //        renderer: "group",
     //        checkbox: true
@@ -167,31 +167,32 @@ gridsModule.controller('mainController', function($scope) {
     var defaultCols = [
         //{headerName: "", valueGetter: "node.id", width: 20}, // this row is for showing node id, handy for testing
         firstColumn,
-        {headerName: "Country", field: "country", headerGroup: 'Participant', width: 150, editable: editableFunc, cellRenderer: countryCellRenderer, filter: 'set',
+        {headerName: "Country", field: "country", headerGroup: 'Participant', width: 150, editable: true, cellRenderer: countryCellRenderer, filter: 'set',
             floatCell: true,
-            filterParams: {cellRenderer: countryCellRenderer, cellHeight: 20},
+            filterParams: {cellRenderer: countryCellRenderer, cellHeight: 20, newRowsAction: 'keep'},
             icons: {
                 sortAscending: '<i class="fa fa-sort-alpha-asc"/>',
                 sortDescending: '<i class="fa fa-sort-alpha-desc"/>'
             }
         },
-        {headerName: "Language", field: "language", headerGroup: 'Participant', width: 150, editable: editableFunc, filter: 'set', cellRenderer: languageCellRenderer,
+        {headerName: "Language", field: "language", headerGroup: 'Participant', width: 150, editable: true, filter: 'set', cellRenderer: languageCellRenderer,
+            filterParams: {newRowsAction: 'keep'},
             icons: {
                 sortAscending: '<i class="fa fa-sort-alpha-asc"/>',
                 sortDescending: '<i class="fa fa-sort-alpha-desc"/>'
             }
         },
-        {headerName: "Game of Choice", field: "game", headerGroup: 'Game', width: 180, editable: editableFunc, filter: 'set', cellClass: function() { return 'alphabet'; },
+        {headerName: "Game of Choice", field: "game", headerGroup: 'Game', width: 180, editable: true, filter: 'set', cellClass: function() { return 'alphabet'; },
             icons: {
                 sortAscending: '<i class="fa fa-sort-alpha-asc"/>',
                 sortDescending: '<i class="fa fa-sort-alpha-desc"/>'
             }
         },
-        {headerName: "Bought", field: "bought", filter: 'set', headerGroup: 'Game', editable: editableFunc, width: 100,
+        {headerName: "Bought", field: "bought", filter: 'set', headerGroup: 'Game', editable: true, width: 100,
             cellRenderer: booleanCellRenderer, cellStyle: {"text-align": "center"}, comparator: booleanComparator,
             floatCell: true,
-            filterParams: {cellRenderer: booleanFilterCellRenderer}},
-        {headerName: "Bank Balance", field: "bankBalance", headerGroup: 'Performance', width: 150, editable: editableFunc, filter: WinningsFilter, cellRenderer: currencyRenderer, cellStyle: currencyCssFunc,
+            filterParams: {newRowsAction: 'keep', cellRenderer: booleanFilterCellRenderer}},
+        {headerName: "Bank Balance", field: "bankBalance", headerGroup: 'Performance', width: 150, editable: true, filter: WinningsFilter, cellRenderer: currencyRenderer, cellStyle: currencyCssFunc,
             filterParams: {cellRenderer: currencyRenderer},
             aggFunc: 'sum',
             icons: {
@@ -205,11 +206,11 @@ gridsModule.controller('mainController', function($scope) {
         {headerName: "Extra Info 2", headerGroupShow: 'open', headerGroup: 'Performance', width: 150, editable: false,
             suppressSorting: true, suppressMenu: true, cellStyle: {"text-align": "left"},
             cellRenderer: function() { return '...cadabra!'; } },
-        {headerName: "Rating", field: "rating", width: 100, editable: editableFunc, cellRenderer: ratingRenderer,
+        {headerName: "Rating", field: "rating", width: 100, editable: true, cellRenderer: ratingRenderer,
             floatCell: true,
             filterParams: {cellRenderer: ratingFilterRenderer}
         },
-        {headerName: "Total Winnings", field: "totalWinnings", filter: 'number', editable: editableFunc, newValueHandler: numberNewValueHandler, width: 150, cellRenderer: currencyRenderer, cellStyle: currencyCssFunc,
+        {headerName: "Total Winnings", field: "totalWinnings", filter: 'number', editable: true, newValueHandler: numberNewValueHandler, width: 150, cellRenderer: currencyRenderer, cellStyle: currencyCssFunc,
             aggFunc: 'sum',
             icons: {
                 sortAscending: '<i class="fa fa-sort-amount-asc"/>',
@@ -219,7 +220,7 @@ gridsModule.controller('mainController', function($scope) {
     ];
     //put in the month cols
     months.forEach(function(month, index) {
-        defaultCols.push({headerName: month, headerGroup: 'Monthly Breakdown', field: month.toLocaleLowerCase(), width: 100, filter: 'number', editable: editableFunc,
+        defaultCols.push({headerName: month, headerGroup: 'Monthly Breakdown', field: month.toLocaleLowerCase(), width: 100, filter: 'number', editable: true,
             newValueHandler: numberNewValueHandler, cellRenderer: currencyRenderer, filterCellRenderer: currencyRenderer,
             cellStyle: {"text-align": "right"}})
     });
@@ -255,7 +256,8 @@ gridsModule.controller('mainController', function($scope) {
     };
 
     $scope.onPinnedColCountChanged = function() {
-        angularGrid.api.onNewCols();
+        var newCount = Number($scope.pinnedColumnCount);
+        angularGrid.columnApi.setPinnedColumnCount(newCount);
     };
 
     $scope.onColCountChanged = function() {
@@ -305,8 +307,8 @@ gridsModule.controller('mainController', function($scope) {
     };
 
     $scope.onGroupHeaders = function() {
-        angularGrid.groupHeaders = $scope.groupHeaders === 'true';
-        angularGrid.api.onNewCols();
+        var groupHeaders = $scope.groupHeaders === 'true';
+        angularGrid.api.setGroupHeaders(groupHeaders);
     };
 
     $scope.onSize = function() {
@@ -317,6 +319,9 @@ gridsModule.controller('mainController', function($scope) {
             $scope.width = '800px';
             $scope.height = '600px';
         }
+        setTimeout( function() {
+            angularGrid.api.doLayout();
+        }, 0);
     };
 
     $scope.onGroupByChanged = function() {
@@ -345,10 +350,6 @@ gridsModule.controller('mainController', function($scope) {
         angularGrid.api.showToolPanel(!showing);
     };
 
-    function editableFunc() {
-        return true;
-    }
-
     function createCols() {
         var colCount = parseInt($scope.colCount);
 
@@ -357,7 +358,7 @@ gridsModule.controller('mainController', function($scope) {
 
         for (var col = defaultCols.length; col<colCount; col++) {
             var colName = colNames[col % colNames.length];
-            var colDef = {headerName: colName, field: "col"+col, width: 200, editable: editableFunc};
+            var colDef = {headerName: colName, field: "col"+col, width: 200, editable: true};
             columns.push(colDef);
         }
         angularGrid.columnDefs = columns;
@@ -451,13 +452,16 @@ function numberNewValueHandler(params) {
     data[field] = valueAsNumber;
 }
 
-function PersonFilter(params) {
+function PersonFilter() {
+}
+
+PersonFilter.prototype.init = function (params) {
     this.$scope = params.$scope;
     this.$scope.onFilterChanged = function() {
         params.filterChangedCallback();
     };
     this.valueGetter = params.valueGetter;
-}
+};
 
 PersonFilter.prototype.getGui = function () {
     return '<div style="padding: 4px; width: 200px;">' +
@@ -494,7 +498,11 @@ PersonFilter.prototype.isFilterActive = function () {
     return value !== null && value !== undefined && value !== '';
 };
 
-function WinningsFilter(params) {
+function WinningsFilter() {
+}
+
+WinningsFilter.prototype.init = function (params) {
+
     var uniqueId = Math.random();
     this.filterChangedCallback = params.filterChangedCallback;
     this.eGui = document.createElement("div");
@@ -519,7 +527,7 @@ function WinningsFilter(params) {
     this.cbGreater50.onclick = this.filterChangedCallback;
     this.cbGreater90.onclick = this.filterChangedCallback;
     this.valueGetter = params.valueGetter;
-}
+};
 
 WinningsFilter.prototype.getGui = function () {
     return this.eGui;

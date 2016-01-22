@@ -23,18 +23,21 @@ import register from 'js/register/register.module';
 angular.module('app', ['app.login', 'app.register', 'app.home', 'app.school','app.toolBar',
     'app.sideNav', 'app.menuItems', 'app.channelGuides', 'ui.router', 'ngMaterial', 'ngMdIcons',
     'angularGrid'])
-    .run(function($rootScope, $state, loginSvc){
+    .run(function($rootScope, $state, $location, loginSvc){
 
         $rootScope.$on('$stateChangeStart', function (event, next, current) {
             //Send the user to the login page if they haven't logged in yet, and it's not the login page
-            //if(!loginSvc.isLoggedIn() && next.name != "Login"){
-            //  $state.go("login");
-            //};
+            if(!loginSvc.isLoggedIn() && next.name != "login"){
+                event.preventDefault();
+              //$state.go("login");
+                $location.path('/#/login');
+                //loginSvc.userNotLoggedIn();
+            };
         });
 
     })
     .config(function($stateProvider, $urlRouterProvider, $mdThemingProvider){
-        $urlRouterProvider.otherwise('/login');
+        $urlRouterProvider.otherwise('/');
 
        $stateProvider
            .state('login',{

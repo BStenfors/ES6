@@ -9,7 +9,7 @@ module awk.grid {
         // taken from:
         // http://stackoverflow.com/questions/9847580/how-to-detect-safari-chrome-ie-firefox-and-opera-browser
         private static isSafari = Object.prototype.toString.call((<any>window).HTMLElement).indexOf('Constructor') > 0;
-        private static isIE = /*@cc_on!@*/false || !!document.documentMode; // At least IE6
+        private static isIE = /*@cc_on!@*/false || !!(<any>document).documentMode; // At least IE6
 
         static iterateObject(object: any, callback: (key:string, value: any) => void) {
             var keys = Object.keys(object);
@@ -123,6 +123,10 @@ module awk.grid {
             element.addEventListener("changed", listener);
             element.addEventListener("paste", listener);
             element.addEventListener("input", listener);
+            // IE doesn't fire changed for special keys (eg delete, backspace), so need to
+            // listen for this further ones
+            element.addEventListener("keydown", listener);
+            element.addEventListener("keyup", listener);
         }
 
         //if value is undefined, null or blank, returns null, otherwise returns the value
@@ -228,7 +232,10 @@ module awk.grid {
         }
 
         static removeFromArray<T>(array: T[], object: T) {
-            array.splice(array.indexOf(object), 1);
+            if (array.indexOf(object) >= 0) {
+                array.splice(array.indexOf(object), 1);
+            }
+            
         }
 
         static defaultComparator(valueA: any, valueB: any) {
@@ -262,8 +269,7 @@ module awk.grid {
         }
 
         /** 
-         * tries to use the provided renderer. if a renderer found, returns true.
-         * if no renderer, returns false.
+         * Tries to use the provided renderer.
          */
         static useRenderer<TParams>(eParent: Element, eRenderer: (params:TParams) => Node | string, params: TParams) {
             var resultFromRenderer = eRenderer(params);
@@ -272,14 +278,14 @@ module awk.grid {
                 var eTextSpan = document.createElement('span');
                 eTextSpan.innerHTML = resultFromRenderer;
                 eParent.appendChild(eTextSpan);
-            } else {
+            } else if (this.isNodeOrElement(resultFromRenderer)) {
                 //a dom node or element was returned, so add child
-                eParent.appendChild(resultFromRenderer);
+                eParent.appendChild(<Node>resultFromRenderer);
             }
         }
 
         /** 
-         * if icon provided, use this (either a string, or a function callback).
+         * If icon provided, use this (either a string, or a function callback).
          * if not, then use the second parameter, which is the svgFactory function
          */
         static createIcon(iconName: any, gridOptionsWrapper: any, colDefWrapper: any, svgFactoryFunc: () => Node) {

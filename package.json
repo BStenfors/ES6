@@ -37,9 +37,9 @@
   },
   "jspm": {
     "directories": {
-      "packages": "public/js/jspm_packages"
+      "packages": "js/jspm_packages"
     },
-    "configFile": "public/js/jspm.config.js",
+    "configFile": "js/jspm.config.js",
     "dependencies": {
       "angular": "github:angular/bower-angular@^1.4.3",
       "angular-animate": "github:angular/bower-angular-animate@^1.4.3",

@@ -37,12 +37,14 @@ module.controller("exampleCtrl", function($scope, $http) {
             last: 'daLasten',
             first: 'daFirsten',
             previous: 'daPreviousen',
+            loadingOoo: 'daLoading...',
             // for set filter
             selectAll: 'daSelect Allen',
             searchOoo: 'daSearch...',
             blanks: 'daBlanc',
             // for number filter and string filter
             filterOoo: 'daFilter...',
+            applyFilter: 'daApplyFilter...',
             // for number filter
             equals: 'daEquals',
             lessThan: 'daLessThan',

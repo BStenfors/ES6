@@ -15,9 +15,9 @@ router.get('/', function(req, res, next) {
 
   //If user is not authenticated redirect the user to the login view
   var loggedIn = req.isAuthenticated();
-  if(!loggedIn) {
-    res.redirect('/login');
-  }
+  //if(!loggedIn) {
+  //  res.redirect('/login');
+  //}
 
   //If user is authenticated render the index view
     var schools = [
@@ -74,7 +74,7 @@ router.get('/', function(req, res, next) {
     res.render('index',
         {
           title: 'The Playground',
-          tabs: schools,
+          schools: schools,
           menuItems: _menuItems,
           adminMenuItems: _adminMenuItems
         }
@@ -93,15 +93,76 @@ router.get('/', function(req, res, next) {
 //});
 
 router.get('/index/:username', function(req, res, next){
+
   res.render('index');
 });
 
 router.post('/login', passport.authenticate('local'), function(req, res, next) {
-  //res.json({user: req.user, loggedIn: true});
-  res.redirect('/');
+  res.json({user: req.user, loggedIn: true});
+  //res.redirect('/');
+  //var schools = [
+  //  {
+  //    name: 'Big 12',
+  //    confId: 1,
+  //    route: '#/conference/1'
+  //  },
+  //  {
+  //    name: 'SEC',
+  //    confId: 2,
+  //    route: '#/conference/2'
+  //  }
+  //];
+  //var _menuItems = [
+  //  {
+  //    icon: 'home',
+  //    label: 'Home',
+  //    state: 'home'
+  //  },
+  //  {
+  //    icon: 'settings_remote',
+  //    label: 'Channel Guides',
+  //    state: 'channelGuides'
+  //  },
+  //  {
+  //    icon: 'schedule',
+  //    label: 'Schedules',
+  //    state: 'schedules'
+  //  }
+  //];
+  //var _adminMenuItems = [
+  //  {
+  //    icon: 'menu',
+  //    title: 'Menu Items',
+  //    state: 'adminMenuItems'
+  //  },
+  //  {
+  //    icon: 'school',
+  //    title: 'Schools',
+  //    state: 'schools'
+  //  }
+  //];
+  //
+  //menuItem.find({}, function(err, docs){
+  //  console.log('Menu items err: ' + err);
+  //  console.log('Menu Items docs: ' + docs);
+  //  for(var idx in docs){
+  //    _menuItems.push(docs[idx]._doc);
+  //  }
+
+  //});
+  //
+  //res.render('index',
+  //    {
+  //      title: 'The Playground',
+  //      schools: schools,
+  //      menuItems: _menuItems,
+  //      adminMenuItems: _adminMenuItems
+  //    }
+  //);
 });
 
 router.get('/login', function(req, res, next){
+  console.log('loading log in handlebars view! ');
   res.render('login', {title: 'Login to the Playground!'});
 });
 

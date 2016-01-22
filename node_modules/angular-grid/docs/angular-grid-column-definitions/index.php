@@ -49,6 +49,10 @@ include '../documentation_header.php';
             <td>Tooltip for the column header</td>
         </tr>
         <tr>
+            <th>headerClass</th>
+            <td>Class to use for the cell. Can be string, array of strings, or function.</td>
+        </tr>
+        <tr>
             <th>valueGetter(params)</th>
             <td>Expression or function to get the cells value.</td>
         </tr>
@@ -75,6 +79,11 @@ include '../documentation_header.php';
         <tr>
             <th>cellRenderer(params)</th>
             <td>A function for rendering a cell.</td>
+        </tr>
+        <tr>
+            <th>floatingCellRenderer(params)</th>
+            <td>A function for rendering floating cells. If both cellRenderer and floatingCellRenderer are
+            provided, frozen cells will use floatingCellRenderer if available, if not then cellRenderer.</td>
         </tr>
         <tr>
             <th>cellClicked(params)</th>
@@ -107,6 +116,15 @@ include '../documentation_header.php';
         <tr>
             <th>unSortIcon</th>
             <td>Set to true if you want the unsorted icon to be shown when no sort is applied to this column.</td>
+        </tr>
+        <tr>
+            <th>sort</th>
+            <td>Set to 'asc' or 'desc' to sort by this column by default.</td>
+        </tr>
+        <tr>
+            <th>sortedAt</th>
+            <td>If doing multi sort by default, this column should say when the sort for each column was done
+                in milliseconds, so the grid knows which order to execute the sort.</td>
         </tr>
         <tr>
             <th>suppressSizeToFit</th>

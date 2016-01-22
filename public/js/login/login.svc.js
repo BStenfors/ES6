@@ -4,8 +4,9 @@
 'use strict'
 
 class LoginSvc {
-    constructor($http){
+    constructor($http, $state){
         this.$http = $http;
+        this.$state = $state;
         this.loggedIn = false;
     }
 
@@ -15,8 +16,17 @@ class LoginSvc {
     //properties
 
     login(userData){
-        let status = this.$http.post('/login', userData).then(r => r.data);
+        let self = this;
+        let status = this.$http.post('/login', userData);
+        status.then(function(data){
+            self.userLoggedIn = data.data.loggedIn;
+            $state.go('home');
+        });
         return status;
+    }
+
+    userNotLoggedIn(){
+        this.$http.get('/login').then(r => r.data);
     }
 
     isLoggedIn(){
@@ -28,6 +38,6 @@ class LoginSvc {
     }
 }
 
-LoginSvc.factory.$inject = ['$http'];
+LoginSvc.factory.$inject = ['$http', '$state'];
 
 export {LoginSvc}
