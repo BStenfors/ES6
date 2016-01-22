@@ -4,33 +4,23 @@
 'use strict'
 
 class LoginSvc {
-    constructor($http, $state){
+    constructor($http){
         this.$http = $http;
-        this.$state = $state;
         this.loggedIn = false;
     }
 
     //properties
-    get userLoggedIn() { return this.loggedIn;}
-    set userLoggedIn(val) {this.loggedIn = val;}
+    //get userLoggedIn() { return this.loggedIn;}
+    //set userLoggedIn(val) {this.loggedIn = val;}
     //properties
 
     login(userData){
-        let self = this;
         let status = this.$http.post('/login', userData);
-        status.then(function(data){
-            self.userLoggedIn = data.data.loggedIn;
-            $state.go('home');
-        });
         return status;
     }
 
-    userNotLoggedIn(){
-        this.$http.get('/login').then(r => r.data);
-    }
-
     isLoggedIn(){
-        return this.userLoggedIn;
+        return this.loggedIn;
     }
 
     static factory($http){
@@ -38,6 +28,6 @@ class LoginSvc {
     }
 }
 
-LoginSvc.factory.$inject = ['$http', '$state'];
+LoginSvc.factory.$inject = ['$http'];
 
 export {LoginSvc}

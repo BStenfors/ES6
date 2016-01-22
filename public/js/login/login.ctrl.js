@@ -4,7 +4,7 @@
 'use strict'
 
 class LoginCtrl {
-    constructor (loginSvc, sideNavSvc, $mdSidenav, $state){
+    constructor (loginSvc, $state){
         this.$state = $state;
         this.loginSvc = loginSvc;
         this.user = {};
@@ -17,9 +17,9 @@ class LoginCtrl {
     login(loginData){
         var self = this;
         this.loginSvc.login(loginData.user).then(status =>{
-            if(status.loggedIn){
-                this.loginSvc.userLoggedIn = true;
-                this.$state.go('/');
+            if(status.status === 200){
+                this.loginSvc.loggedIn = true;
+                this.$state.go('home');
             }else{
                 this.$state.go('login');
             }
@@ -31,6 +31,6 @@ class LoginCtrl {
     }
 }
 
-LoginCtrl.$inject = ['loginSvc', 'sideNavSvc', '$mdSidenav', '$state'];
+LoginCtrl.$inject = ['loginSvc', '$state'];
 
 export { LoginCtrl }

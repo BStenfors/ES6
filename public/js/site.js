@@ -23,27 +23,27 @@ import register from 'js/register/register.module';
 angular.module('app', ['app.login', 'app.register', 'app.home', 'app.school','app.toolBar',
     'app.sideNav', 'app.menuItems', 'app.channelGuides', 'ui.router', 'ngMaterial', 'ngMdIcons',
     'angularGrid'])
-    .run(function($rootScope, $state, $location, loginSvc){
+    .run(function($rootScope, $state, loginSvc){
 
         $rootScope.$on('$stateChangeStart', function (event, next, current) {
             //Send the user to the login page if they haven't logged in yet, and it's not the login page
-            if(!loginSvc.isLoggedIn() && next.name != "login"){
-                event.preventDefault();
-              //$state.go("login");
-                $location.path('/#/login');
-                //loginSvc.userNotLoggedIn();
-            };
+            let loggedIn = loginSvc.loggedIn;
+
+            //if(typeof loggedIn != 'undefined' && !loggedIn && next.name != "login"){
+            //    event.preventDefault();
+            //    $state.go("login");
+            //}
         });
 
     })
-    .config(function($stateProvider, $urlRouterProvider, $mdThemingProvider){
+    .config(function($stateProvider, $urlRouterProvider, $mdThemingProvider, $locationProvider){
         $urlRouterProvider.otherwise('/');
 
        $stateProvider
-           .state('login',{
-               url: '/login',
-               templateUrl: 'views/partials/login.html'
-           })
+           //.state('login',{
+           //    url: '/login',
+           //    templateUrl: 'views/partials/login.html'
+           //})
         .state('register',{
                url: '/register',
                templateUrl: 'views/partials/register.html'
@@ -72,6 +72,8 @@ angular.module('app', ['app.login', 'app.register', 'app.home', 'app.school','ap
                url: '/schedules',
                templateUrl: 'views/partials/schedules.html'
            })
+
+        $locationProvider.html5Mode(true);
 
         var customPrimary = {
             '50': '#404040',

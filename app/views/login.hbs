@@ -1,2 +1,33 @@
-<div data-ui-view>
+<div layout="row" flext>
+    <div layout="column" flex>
+        <md-content layout="column" flex class="md-padding">
+            <h2>Log In</h2>
+        </md-content>
+    </div>
+</div>
+<div layout="row" flex>
+    <div layout="column" flex id="content">
+        <md-content layout="column" flex class="md-padding">
+            <form method="post" action="/login">
+                <md-card>
+                    <md-card-content>
+                        <md-input-container>
+                            <label>Username</label>
+                            <input type="text" name="username" />
+                        </md-input-container>
+                        <md-input-container>
+                            <label>Password</label>
+                            <input type="password" name="password" />
+                        </md-input-container>
+                        <div class="md-actions" layout="row" layout-align="end center">
+                            <md-button href="/register">Create Account</md-button>
+                            <md-button>Login with Facebook</md-button>
+                            <md-button>Login with Google</md-button>
+                            <md-button type="submit">Log In</md-button>
+                        </div>
+                    </md-card-content>
+                </md-card>
+            </form>
+        </md-content>
+    </div>
 </div>
