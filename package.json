@@ -12,7 +12,8 @@
     "express": "~4.13.0",
     "hbs": "~3.1.0",
     "morgan": "~1.6.1",
-    "serve-favicon": "~2.3.0"
+    "serve-favicon": "~2.3.0",
+    "traceur": "0.0.105"
   },
   "devDependencies": {
     "angular-grid": "^1.12.4",
@@ -44,17 +45,16 @@
     "gulp-livereload": "~3.8.1"
   },
   "jspm": {
-    "directories": {
-      "packages": "public/js/jspm_packages"
-    },
-    "configFile": "public/js/jspm.config.js",
+    "directories": {},
+    "configFile": "jspm.config.js",
     "dependencies": {
       "angular": "github:angular/bower-angular@^1.4.3",
       "angular-animate": "github:angular/bower-angular-animate@^1.4.3",
       "angular-grid": "npm:angular-grid@^1.12.4",
       "angular-material": "github:angular/bower-material@^0.10.0",
       "angular-material-icons": "npm:angular-material-icons@^0.5.0",
-      "angular-ui-router": "github:angular-ui/ui-router@^0.2.15"
+      "angular-ui-router": "github:angular-ui/ui-router@^0.2.15",
+      "babel": "npm:babel-core@^6.7.4"
     },
     "devDependencies": {
       "babel": "npm:babel-core@^5.1.13",

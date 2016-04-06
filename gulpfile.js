@@ -42,9 +42,9 @@ gulp.task('serve', function() {
 });
 
 gulp.task('changes', function(){
-    gulpLiveReload.listen();
+    //gulpLiveReload.listen();
     gulp.watch('./public/stylesheets/*.scss', ["sass"]);
     gulp.watch(['./public/js/**/*.js', './public/views/**/*.html']);
 })
 
-gulp.task('default', ['serve', 'changes']);
+gulp.task('default', ['serve', 'changes', 'sass']);

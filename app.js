@@ -39,6 +39,9 @@ app.use(require('express-session')({
 }));
 app.use(passport.initialize());
 app.use(passport.session());
+console.log(path.join(__dirname, 'jspm_packages'));
+app.use("/jspm_packages", express.static(path.join(__dirname, 'jspm_packages')));
+app.use("/stylesheets",express.static(path.join(__dirname, 'stylesheets')));
 app.use(express.static(path.join(__dirname, 'public')));
 
 app.use('/', routes);

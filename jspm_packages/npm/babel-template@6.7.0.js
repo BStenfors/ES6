@@ -1,0 +1,1 @@
+module.exports = require("npm:babel-template@6.7.0/lib/index");

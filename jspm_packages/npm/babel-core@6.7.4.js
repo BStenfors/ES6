@@ -1,0 +1,1 @@
+module.exports = require("npm:babel-core@6.7.4/index");
